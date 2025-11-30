@@ -1,42 +1,54 @@
-using ArrayStarAdditionApp.Domain;
 
+using System;
 
-namespace ArrayStarAdditionApp
+class Program
 {
 
-    class Program
+    static void Main()
     {
-
-        static void Main()
+        string[] inputArray = { "abc", "abcd", "efgh" };
+        
+        foreach (string word in GetLongestStrings(inputArray))
         {
-
-            string[] starArray = { "Gunnu", "Sanya", "Sarvesh" };
-            foreach (var item in StarArrayExtended(starArray))
-
-            {
-                Console.WriteLine(item);
-            }
+            Console.WriteLine(word); 
         }
-
-
-        static string[] StarArrayExtended(string[] words)
-        {
-
-            string[] result = new string[words.Length + 2];
-
-            result[0] = "***";
-
-            for (int i = 0; i < words.Length; i++)
-            {
-                result[i + 1] = $"*{words[i]}*";
-            }
-            result[result.Length - 1] = "***";
-
-            return result;
-        }
-
 
     }
+
+    static string[] GetLongestStrings(string[] words)
+    {
+
+        int maxLength = 0;
+        foreach (var word in words)
+        {
+            if (word.Length > maxLength)
+                maxLength = word.Length;
+        }
+
+
+        int count = 0;
+        foreach (var word in words)
+        {
+            if (word.Length == maxLength)
+                count++;
+        }
+
+
+        string[] result = new string[count];
+        int index = 0;
+        foreach (var word in words)
+        {
+            if (word.Length == maxLength)
+            {
+                result[index] = word;
+                index++;
+            }
+        }
+
+        return result;
+    }
+
+
+
+
 }
-
-
